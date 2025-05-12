@@ -1,0 +1,598 @@
+/* Reset & Layout */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header Styles */
+.header {
+    background-image: linear-gradient(to right, #34a853, #4285f4);
+    color: white;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 60px; /* Fixed height for header */
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+/* Menu Button (Sidebar Toggle) */
+.menu-btn {
+    font-size: 2rem;
+    background: none;
+    color: white;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    left: 1rem;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.menu-btn:hover {
+    color: #000;
+    transform: scale(1.1);
+}
+
+.menu-btn:active {
+    transform: scale(0.9);
+}
+.menu-btn.active {
+    color: #000; /* Change color when active */
+    rotate: 90deg; /* Rotate when active */
+    transition: all 0.3s ease;
+    left: 160px;
+    position: fixed;
+}
+
+/* Login Button */
+.login-btn {
+    position: absolute;
+    top: 45%;
+    left: auto;
+    right: 5rem;
+    transform: translateY(-50%);
+    background-color: #23b000;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    height: auto;  
+    width: auto;
+    aspect-ratio: 1/1;    
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-top-right-radius: 0%;
+    border: 1px solid white;
+    overflow: hidden;
+}
+
+.login-btn::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(30%) scaleY(1.2) scaleX(1.2);
+    bottom: 80%;
+    width: 100%;
+    height: 100%;
+    background-color: #ffff;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.3s 0.1s cubic-bezier(1, 1, 1, 1);
+    z-index: -1;
+}
+.login-btn::after {
+    content: "";
+    position: absolute;
+    left: 60%;
+    transform: translateX(40%) scaleY(1.2) scaleX(1.2);
+    bottom: 90%;
+    width: 100%;
+    height: 100%;
+    background-color: #23b000;
+    border-radius: 50%;
+    display: block;
+    transition: all 0.3s 0.1s cubic-bezier(1, 1, 1, 1);
+    z-index: -1;
+}
+
+.login-btn:hover {
+    color: #23b000;
+    border: 1px solid #23b000;
+    box-shadow: #23b000 10px 10px 40px 3px;
+}
+
+.login-btn:hover::before {
+    bottom: 10%;
+    background-color: white;
+    transform: translateX(-50%) scaleY(1.3) scaleX(1.3);
+}
+
+.login-btn:hover::after {
+    bottom: 80%;
+    left: 80%;
+    transform: translateX(0%) scaleY(1.5) scaleX(1.5);
+}
+
+.login-btn:active {
+    transform: scale(0.9);
+}
+
+/* Profile Section */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    position: absolute;
+    right: 5rem;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+.profile.hidden {
+    display: none; /* Hide profile section by default */
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    border-top-right-radius: 0%;
+}
+
+.profile img:hover {
+    transition: all 0.3s ease;
+    box-shadow: #fff 0px 1px 50px 1px;
+    margin-top: 20%;
+}
+.profile img:active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: 30%;
+    border-bottom-left-radius: 0%;
+    border-top-right-radius: 50%;
+}
+
+/* Profile Info Styles */
+.profile-info {
+    display: block; /* Default state */
+    position: absolute;
+    height: auto;
+    top: 110%;
+    right: 0;
+    background-color: white;
+    color: black;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 999;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.profile-info.hidden {
+    display: none; /* Hide the profile info card */
+}
+
+.profile-info:hover {
+    color: white;
+    transition: all 0.3s ease;
+    background-image: linear-gradient(to right, #4285f4, #34a853, #fbbc05, #ea4335);
+    background-size: 500%;
+    box-shadow: 0 0 1px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+}
+
+.profile-info.hidden {
+    display: none; /* Hide the profile info card */
+}
+
+.profile-info p {
+    margin: 0.5rem 0;
+}
+
+.profile-info button {
+    display: block; /* Stack buttons vertically */
+    width: 100%; /* Full width */
+    background-color: #4fd;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 0.5rem; /* Add spacing between buttons */
+    transition: all 0.3s ease;
+}
+
+.profile-info button:hover {
+    background-color: #34a853;
+    color: #ccc;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.profile-info button:active {
+    transform: scale(0.9);
+    background: red;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    height: calc(100vh - 64px); /* Adjust height based on header */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -240px;
+    width: 200px;
+    height: 100vh;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-top-left-radius: 0%;
+    background-color: #569dff;
+    padding: 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.6);
+    transition: left 0.3s ease;
+    z-index: 100;
+}
+
+.sidebar.active {
+    left: 0; /* Show sidebar when active */
+}
+
+.sidebar h2 {
+    margin: 2rem 0rem 0rem 1rem;
+}
+
+/* Sidebar UL Styles */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: calc(100vh - 100px); /* Adjust height to fit within the viewport */
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: thin; /* For modern browsers */
+    scrollbar-color: #569dff #569dff; /* Custom scrollbar colors */
+}
+
+/* Custom Scrollbar Styles (for WebKit browsers) */
+.sidebar ul::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.sidebar ul::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.sidebar ul::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa; /* Darker color on hover */
+}
+
+.sidebar ul::-webkit-scrollbar-track {
+    background-color: #f4f4f4; /* Background of the scrollbar track */
+}
+
+.sidebar ul li a {
+    font-size: 0.9rem;
+    display: block;
+    padding: 0.5rem;
+    text-decoration: none;
+    background-color: transparent;
+    color: #fff;
+    transition: 0.4s ease;
+    border-radius: 5px;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    margin-top: 10px;
+}
+
+.sidebar ul li a:hover {
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    border-right: 4px solid black;
+    border-bottom: 4px solid black;
+    color: #000;
+    background-color: #ccc;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.sidebar ul li a:active {
+    transform: scale(0.9);
+    background-color: transparent;
+    color: #ccc;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    text-align: center;
+}
+
+.main-content h3 {
+    color: rgb(157, 157, 157);
+    font-style: italic;
+    font-weight: 10;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Content Style*/
+.modal-content {
+    background: transparent;
+    border: 1pt solid black;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content h2{
+    backdrop-filter: blur(100%);
+    padding: 1px;
+    text-shadow: white -1.1px 1.1px 10px;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+/* Complete Button */
+.continue-login {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #ffff;
+    color: blue;
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.5s ease;
+    margin-top: 2rem;
+}
+
+.continue-login:hover {
+    background-color: blue;
+    color: white;
+}
+
+.continue-login:active {
+    transform: scale(0.9);
+}
+
+/* Google Button */
+.google-btn {
+    display: flex;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: white;
+    color:  black;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.5s ease;
+}
+
+.google-btn svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.google-btn:hover {
+    color: white;
+    background-color: #000;
+}
+
+.google-btn:active {
+    transform: scale(0.9); 
+}
+
+.google-btn span {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Links {
+    color: rgb(26, 54, 155);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    background-color: gray;
+    padding: 3px;
+    font-style: normal;
+    font-weight: 100;
+}
+
+.Links {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
+
+.close-btn {
+    margin-top: 1rem;
+    background: #ccc;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.close-btn:hover {
+    background-color: #aaa;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+.close-btn:active {
+    transform: scale(0.9);
+}
+
+/* Blurred Background for Modal */
+.blurred .container {
+    filter: blur(5px);
+    pointer-events: none;
+    background-color: #ccc;
+}
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    text-shadow: white -1.9px -1px 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.form-group input:hover {
+    border: 2px solid black;
+}
+
+#showPassword {
+    position: absolute;
+    left: auto;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+}
+
+/* Resume Upload Card Styles */
+.resume-upload-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px); /* Blur the background */
+  opacity: 0; /* Initially hidden */
+  pointer-events: none; /* Prevent interaction when hidden */
+  transition: opacity 0.3s ease;
+}
+
+.resume-upload-card.visible {
+  opacity: 1; /* Make it visible */
+  pointer-events: auto; /* Allow interaction */
+}
+
+.resume-upload-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: yellowgreen 0 0 50px 0.1px;
+  background-image: linear-gradient(to top, #34a853, #4285f4);
+}
+
+.upload-btn {
+  padding: 0.75rem 1.5rem;
+  background-image: linear-gradient(to bottom, #ffff,  #4285f4);
+  color: auto;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+    transition: background-image 0.9s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.upload-btn:hover {
+   background-image: linear-gradient(to top, #ffff, #4285f4);
+   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+   transform: scale(1.05);
+   color: white;
+}
+
+/* Categories Section in Resume Upload Card */
+.categories {
+    display: flex;
+  border: #000 2px solid;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  width: 500px;
+  height: 200px;
+  max-height: 10%;
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: thin; /* For modern browsers */
+    scrollbar-color: grey white; /* Custom scrollbar colors */
+  margin:  auto;
+}
+
+.categories label {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 0px 10px 0px 0px;
+    border-radius: 20px;
+    border-top-left-radius: 0%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    width: auto; /* Adjust width to fit content */
+    height: fit-content;
+    border: #000 2px solid;
+    font-family: 'Times New Roman', Times, serif;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Ensure text stays on one line */
+}
+
+.categories label:hover {
+    background-color: #ccc;
+    box-shadow: black 0 0 5px 1px;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Signup</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="modal">
+  <div class="modal-header">
+    <h1>Welcome to Our Service</h1>
+    <p>Please create an account to get started.</p>
+  </div>
+  <div class="modal-content" style="margin: 3rem auto;">
+    <h2>Create a New Account</h2>
+    <form id="signupForm">
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" id="signupEmail" required placeholder="Enter Your Email" />
+      </div>
+      <div class="form-group">
+        <label>Password:
+          <input type="checkbox" id="showPassword" />
+        </label>
+        <input type="password" id="password" name="password" required placeholder="Enter Your Password" />
+      </div>
+      <div class="form-group">
+        <label>Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="password" required placeholder="Confirm Your Password" />
+      </div>
+      <button type="submit" class="continue-login">Sign Up</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module" src="signup.js"></script>
+</body>
+</html>

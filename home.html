@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <button id="toggleSidebar" class="menu-btn">☰</button>
+    <h1>Resume Portal</h1>
+    <div id="header-right" class="btn-container">
+      <!-- Login Button -->
+      <button id="loginBtn" class="login-btn">Login</button>
+      <!-- Profile Section -->
+      <div id="profileSection" class="profile hidden">
+        <img id="profileImg" src="default-profile.png" alt="profile">
+        <div class="profile-info hidden">
+          <p id="profileName"></p>
+          <p id="profileEmail"></p>
+          <!-- Add Resume Button  -->
+          <button id="addResumeBtn" class="add-resume-btn">Add Resume</button>
+          <!-- Logout Button -->
+          <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar hidden">
+    <h2>Categories</h2>
+    <ul>
+      <li><a href="#">Animator / Motion Designer</a></li>
+      <li><a href="#">Business Analyst</a></li>
+      <li><a href="#">Civil Engineer</a></li>
+      <li><a href="#">Content Writer / Copywriter</a></li>
+      <li><a href="#">Data Analyst / Data Scientist</a></li>
+      <li><a href="#">Electrical Engineer</a></li>
+      <li><a href="#">Finance / Accounting</a></li>
+      <li><a href="#">Graphic Designer</a></li>
+      <li><a href="#">HR / Recruiter</a></li>
+      <li><a href="#">Marketing / Sales Executive</a></li>
+      <li><a href="#">Mechanical Engineer</a></li>
+      <li><a href="#">Network Engineer / Cybersecurity</a></li>
+      <li><a href="#">Photographer / Videographer</a></li>
+      <li><a href="#">Social Media Manager</a></li>
+      <li><a href="#">Software Developer</a></li>
+      <li><a href="#">System Administrator</a></li>
+      <li><a href="#">UI/UX Designer</a></li>
+      <li><a href="#">Video Editor</a></li>
+      <li><a href="#">Web Developer / Frontend / Backend</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Container -->
+  <div class="container">
+    <main class="main-content">
+      <h1>Welcome to Resume Portal</h1>
+      <h3>Ready to hire the best employee for you</h3>
+    </main>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Login to Resume Portal</h2>
+      <form id="loginForm">
+        <!-- Email Input -->
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        </div>
+        <!-- Password Input -->
+        <div class="form-group">
+          <label for="password" class="passIn">Password:
+            <input type="checkbox" id="showPassword" />
+          </label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
+        <!-- Login Button -->
+        <button type="submit" class="continue-login">Login</button>
+      </form>
+      <p>or</p>
+      <!-- Google Login Button -->
+      <button class="google-btn" id="googleLoginBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" class="svg">
+          <path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" class="blue"></path>
+          <path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" class="green"></path>
+          <path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" class="yellow"></path>
+          <path fill="#EB4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" class="red"></path>
+        </svg>
+        <span>Continue with Google</span>
+      </button>
+      <p class="text-sm mt-2">
+        Don't have an account?
+        <a href="signup.html" id="signupLink" class= "Links">Sign Up</a>
+      </p>
+      <p class="text-sm mt-1">
+        <a href="reset-pass.html" id="resetPasswordLink" class="Links">Forgot Password?</a>
+      </p>
+      <!-- Close Modal Button -->
+      <button id="closeModal" class="close-btn">Close</button>
+    </div>
+  </div>
+
+  <!-- Resume Upload Card -->
+  <div id="resumeUploadCard" class="resume-upload-card hidden">
+    <div class="resume-upload-content">
+      <h2>Upload Your Resume</h2>
+      <form id="resumeUploadForm">
+        <div class="form-group">
+          <label for="resumeFile">Choose File:</label>
+          <input type="file" id="resumeFile" name="resumeFile" accept=".pdf,.doc,.docx" required />
+        </div>
+        <div class="form-group">
+          <label>Select Categories:</label>
+          <div id="dynamicCategories" class="categories">
+            <!-- Categories will be dynamically populated here -->
+          </div>
+        </div>
+        <button type="submit" class="upload-btn">Upload</button>
+      </form>
+      <button id="closeResumeCard" class="close-btn">Close</button>
+    </div>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="home.js"></script>
+</body>
+</html>
