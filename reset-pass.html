@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reset Password</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <!-- Password Reset Modal -->
   <div id="resetPasswordModal" class="modal">
     <div class="modal-content">
       <h2>Reset Your Password</h2>
+
+      <!-- Email Form -->
       <form id="resetPasswordForm">
         <div class="form-group">
           <label for="resetEmail">Email:</label>
@@ -25,18 +32,21 @@
         </div>
         <button type="submit" class="continue-login">Send Reset Link</button>
       </form>
-      <!-- Add this form inside your body or modal -->
-<form id="newPasswordForm" class="hidden">
-  <label for="newPassword">New Password:</label>
-  <input type="password" id="newPassword" required />
-  <button type="submit">Update Password</button>
-</form>
+
+      <!-- New Password Form (hidden by default) -->
+      <form id="newPasswordForm" class="hidden">
+        <div class="form-group">
+          <label for="newPassword">New Password:</label>
+          <input type="password" id="newPassword" required />
+        </div>
+        <button type="submit">Update Password</button>
+      </form>
 
       <button id="closeResetModal" class="close-btn">Close</button>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="reset-pass.js"></script>
+  <!-- Supabase & Script -->
+  <script type="module" src="reset-pass.js"></script>
 </body>
 </html>
