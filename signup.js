@@ -5,6 +5,7 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const signupForm = document.getElementById("signupForm");
 const signupPasswordInput = document.getElementById("password");
 const confirmPasswordInput = document.getElementById("confirmPassword");
+const checkBox = document.getElementById("checkbox");
 
 if (signupForm) {
   signupForm.addEventListener("submit", async (event) => {
@@ -41,6 +42,18 @@ if (signupForm) {
     } catch (error) {
       console.error("Signup error:", error); // Debugging: Log the error
       alert("Signup failed: " + error.message);
+    }
+  });
+}
+
+if (checkBox) {
+  checkBox.addEventListener("change", function () {
+    if (checkBox.checked) {
+      signupPasswordInput.type = "text";
+      confirmPasswordInput.type = "text";
+    } else {
+      signupPasswordInput.type = "password";
+      confirmPasswordInput.type = "password";
     }
   });
 }
