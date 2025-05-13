@@ -499,7 +499,7 @@ body {
     border: 2px solid black;
 }
 
-#showPassword {
+#checkbox {
     position: absolute;
     left: auto;
     cursor: pointer;

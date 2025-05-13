@@ -8,6 +8,8 @@ const toggleBtn = document.getElementById("toggleSidebar");
 const loginBtn = document.getElementById("loginBtn");
 const profileSection = document.getElementById("profileSection");
 const profileImg = document.getElementById("profileImg");
+const profileName = document.getElementById("profileName"); 
+const profileEmail = document.getElementById("profileEmail"); 
 const logoutBtn = document.getElementById("logoutBtn");
 const sidebar = document.getElementById("sidebar");
 const loginModal = document.getElementById("loginModal");
@@ -17,6 +19,7 @@ const passwordInput = document.getElementById("password");
 const googleLoginBtn = document.getElementById("googleLoginBtn");
 const closeModalBtn = document.getElementById("closeModal");
 const profileInfoCard = document.querySelector(".profile-info");
+const checkBox = document.getElementById("checkbox");
 
 // Toggle Sidebar
 toggleBtn.addEventListener("click", () => {
@@ -53,8 +56,25 @@ loginForm.addEventListener("submit", async (e) => {
     alert("Login successful!");
     loginModal.classList.add("hidden");
     document.body.style.overflow = "auto";
-    profileSection.classList.remove("hidden");
-    loginBtn.style.display = "none";
+
+    // Update profile section immediately
+    const session = data.session;
+    if (session) {
+      profileImg.src = session.user.user_metadata.avatar_url || "default-avatar.png";
+      profileName.textContent = session.user.user_metadata.full_name || "User";
+      profileEmail.textContent = session.user.email;
+      profileSection.classList.remove("hidden");
+      loginBtn.style.display = "none";
+    }
+  }
+});
+
+// Check box for showing/hiding password
+checkBox.addEventListener("change", () => {
+  if (checkBox.checked) {
+    passwordInput.type = "text";
+  } else {
+    passwordInput.type = "password";
   }
 });
 
@@ -71,7 +91,7 @@ googleLoginBtn.addEventListener("click", async () => {
   }
 });
 
-// Display Profile Section
+// Display Profile Section on Page Load
 supabase.auth.getSession().then(({ data: { session } }) => {
   if (session) {
     console.log("User is logged in:", session.user);
@@ -90,8 +110,19 @@ profileImg.addEventListener("click", () => {
 
 // Handle Logout
 logoutBtn.addEventListener("click", async () => {
+  const confirmLogout = confirm("Are you sure you want to logout?");
+  
+  if (confirmLogout) {
   const { error } = await supabase.auth.signOut();
-  if (error) {
+    if (error) {
     console.error("Error during logout:", error);
-  }  
+    } else {
+    alert("Logout successful!");
+    profileSection.classList.add("hidden");
+    loginBtn.style.display = "block";
+    profileInfoCard.classList.add("hidden");
+    }
+} else {
+    console.log("Logout cancelled.");
+  }
 });
