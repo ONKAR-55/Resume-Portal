@@ -13,7 +13,7 @@ const profileEmail = document.getElementById("profileEmail");
 const logoutBtn = document.getElementById("logoutBtn");
 const sidebar = document.getElementById("sidebar");
 const loginModal = document.getElementById("loginModal");
-const loginForm = docuent.getElementById("loginForm");
+const loginForm = document.getElementById("loginForm");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const googleLoginBtn = document.getElementById("googleLoginBtn");
@@ -54,15 +54,11 @@ loginForm.addEventListener("submit", async (e) => {
     alert("Login failed. Please check your credentials.");
   } else {
     alert("Login successful!");
-  }
-});
-
-// Check box for showing/hiding password
-checkBox.addEventListener("change", () => {
-  if (checkBox.checked) {
-    passwordInput.type = "text";
-  } else {
-    passwordInput.type = "password";
+    loginModal.classList.add("hidden");
+    document.body.style.overflow = "auto";
+    if (data.session) {
+      displayUserProfile(data.session);
+    }
   }
 });
 
@@ -79,21 +75,30 @@ googleLoginBtn.addEventListener("click", async () => {
   }
 });
 
-// Display User Profile
-async function displayUserProfile() {
-  const { data: { user }, error } = await supabase.auth.getUser();
-
-  if (user) {
-    profileSection.classList.remove("hidden");
-    loginBtn.style.display = "none";
-    profileName.textContent = user.user_metadata.full_name || "User";
-    profileEmail.textContent = user.email || "Email not available";
+// Check box for showing/hiding password
+checkBox.addEventListener("change", () => {
+  if (checkBox.checked) {
+    passwordInput.type = "text";
   } else {
-    alert("No user found. Please log in again.");
-    profileSection.classList.add("hidden");
-    loginBtn.style.display = "block";
+    passwordInput.type = "password";
   }
-}
+});
+
+function displayUserProfile(session) {
+  if(!session) return;
+  profileImg.src = session.user.user_metadata.avatar_url || "default-avatar.png";
+  profileName.textContent = session.user.user_metadata.full_name || "User";
+  profileEmail.textContent = session.user.email;
+  profileSection.classList.remove("hidden");
+  loginBtn.style.display = "none";
+} 
+
+// check user session on page load
+supabase.auth.getSession().then(({ data: { session }, error }) => {
+  if (session) {
+    displayUserProfile(session);
+  }
+}); // <-- Add this closing brace and parenthesis
 
 // Profile Info Card
 profileImg.addEventListener("click", () => {
@@ -118,13 +123,3 @@ logoutBtn.addEventListener("click", async () => {
     console.log("Logout cancelled.");
   }
 });
-
-// Initialize the app
-async function init() {
-  const { data: { user }, error } = await supabase.auth.getUser();
-  if (error) {
-    console.error("Error fetching user:", error);
-  } else if (user) {
-    displayUserProfile();
-  }
-}
