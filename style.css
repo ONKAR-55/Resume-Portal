@@ -18,7 +18,7 @@ body {
 
 .header h1 {
     margin: 0;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 /* Menu Button (Sidebar Toggle) */
@@ -29,7 +29,7 @@ body {
     cursor: pointer;
     border: none;
     position: absolute;
-    left: 1rem;
+    left: 1px;
     transition: all 0.3s ease;
     z-index: 1000;
 }
@@ -53,9 +53,8 @@ body {
 /* Login Button */
 .login-btn {
     position: absolute;
-    top: 45%;
     left: auto;
-    right: 5rem;
+    right: 1rem;
     transform: translateY(-50%);
     background-color: #23b000;
     font-size: 1.2rem;
