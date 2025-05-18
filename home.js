@@ -20,6 +20,11 @@ const googleLoginBtn = document.getElementById("googleLoginBtn");
 const closeModalBtn = document.getElementById("closeModal");
 const profileInfoCard = document.querySelector(".profile-info");
 const checkBox = document.getElementById("checkbox");
+const addResumeBtn = document.getElementById("addResumeBtn");
+const resumeCard = document.getElementById("resumeUploadCard");
+const closeResumeCardBtn = document.getElementById("closeResumeCard");
+const resumeUploadForm = document.getElementById("resumeUploadForm");
+const resumeFileInput = document.getElementById("resumeFile");
 
 // Toggle Sidebar
 toggleBtn.addEventListener("click", () => {
@@ -86,26 +91,26 @@ checkBox.addEventListener("change", () => {
 
 function displayUserProfile(session) {
   if(!session) return;
-  profileImg.src = session.user.user_metadata.avatar_url || "default-avatar.png";
+  profileImg.src = session.user.user_metadata.avatar_url || "https://ui-avatars.com/api/?name=Users";
   profileName.textContent = session.user.user_metadata.full_name || "User";
   profileEmail.textContent = session.user.email;
   profileSection.classList.remove("hidden");
   loginBtn.style.display = "none";
 } 
 
-// check user session on page load
+// Check the user is loged in or not
 supabase.auth.getSession().then(({ data: { session }, error }) => {
   if (session) {
     displayUserProfile(session);
   }
-}); // <-- Add this closing brace and parenthesis
+});
 
 // Profile Info Card
 profileImg.addEventListener("click", () => {
   profileInfoCard.classList.toggle("hidden");
 });
 
-// Handle Logout
+// Logout
 logoutBtn.addEventListener("click", async () => {
   const confirmLogout = confirm("Are you sure you want to logout?");
   
@@ -121,5 +126,80 @@ logoutBtn.addEventListener("click", async () => {
     }
 } else {
     console.log("Logout cancelled.");
+  }
+});
+
+// Toggle resume upload card
+addResumeBtn.addEventListener("click", () => {
+  resumeCard.classList.add("visible");
+  document.body.style.overflow = "hidden";
+  profileInfoCard.classList.add("hidden")
+});
+
+closeResumeCardBtn.addEventListener("click", () => {
+  resumeCard.classList.remove("visible");
+  document.body.style.overflow = "auto";
+});
+
+// File Handeling
+resumeUploadForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const resumeFile = resumeFileInput.files[0];
+  const categoryCheckboxes = document.querySelectorAll('input[name="category"]:checked');
+  const selectedCategories = Array.from(categoryCheckboxes).map(cb => cb.value);
+
+  if (!resumeFile) {
+    alert("Please select a file to upload.");
+    return;
+  }
+
+  if (selectedCategories.length === 0) {
+    alert("Please select at least one category.");
+    return;
+  }
+
+  // Get user data
+  const sessionData = await supabase.auth.getSession();
+  const user = sessionData.data.session.user;
+  const timestamp = Date.now();
+  const fileName = `${user.user_metadata.full_name}_${timestamp}_${resumeFile.name}`; // Correct filename
+  const filePath = `public/${fileName}`;
+
+  const { data, error } = await supabase.storage
+    .from("resumes")
+    .upload(filePath, resumeFile, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
+  //Error and massage handeling
+  if (error) {
+    console.error("Error uploading resume:", error);
+    console.error("Supabase Storage Error:", error.message); // Log the error message
+    console.error("Supabase Storage Error Details:", error); // Log the entire error object
+    alert("Failed to upload resume. Please try again.");
+  } else {
+    console.log("Resume uploaded successfully:", data);
+    alert("Resume uploaded successfully!");
+    resumeCard.classList.remove("visible");
+    document.body.style.overflow = "auto";
+
+    
+// Add resume metadata
+    try {
+      const fileUrl = `${SUPABASE_URL}/storage/v1/object/public/resumes/${filePath}`; // Correct file URL
+      await supabase.from("resume_metadata").insert({
+        user_id: user.id,
+        user_email: user.email,
+        file_name: fileName,
+        file_url: fileUrl,
+        categories: JSON.stringify(selectedCategories),
+        uploaded_at: new Date().toISOString()
+      });
+      console.log("Resume metadata added successfully.");
+    } catch (metadataError) {
+      console.error("Error adding resume metadata:", metadataError);
+      alert("Failed to add resume metadata. Please check the console.");
+    }
   }
 });

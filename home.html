@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Resume Portal</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -17,12 +18,12 @@
       <button id="loginBtn" class="login-btn">Login</button>
       <!-- Profile Section -->
       <div id="profileSection" class="profile hidden">
-        <img id="profileImg" src="default-profile.png" alt="profile">
+        <img id="profileImg" src="https://ui-avatars.com/api/?name=User" alt="profile">
         <div class="profile-info hidden">
           <p id="profileName"></p>
           <p id="profileEmail"></p>
           <!-- Add Resume Button  -->
-          <button id="addResumeBtn" class="add-resume-btn">Add Resume</button>
+          <button id="addResumeBtn" class="add-resume-btn" >Add Resume</button>
           <!-- Logout Button -->
           <button id="logoutBtn" class="logout-btn">Logout</button>
         </div>
@@ -72,7 +73,7 @@
         <!-- Email Input -->
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email"/>
         </div>
         <!-- Password Input -->
         <div class="form-group">
@@ -117,9 +118,27 @@
           <input type="file" id="resumeFile" name="resumeFile" accept=".pdf,.doc,.docx" required />
         </div>
         <div class="form-group">
-          <label>Select Categories:</label>
+          <label for="resumeFile">Select Categories:</label>
           <div id="dynamicCategories" class="categories">
-            <!-- Categories will be dynamically populated here -->
+            <li><label><input type="checkbox" name="category" value="Animator / Motion Designer">Animator / Motion Designer</label></li>
+            <li><label><input type="checkbox" name="category" value="Business Analyst">Business Analyst</label></li>
+            <li><label><input type="checkbox" name="category" value="Civil Engineer">Civil Engineer</label></li>
+            <li><label><input type="checkbox" name="category" value="Content Writer / Copywriter">Content Writer / Copywriter</label></li>
+            <li><label><input type="checkbox" name="category" value="Data Analyst / Data Scientist">Data Analyst / Data Scientist</label></li>
+            <li><label><input type="checkbox" name="category" value="Electrical Engineer">Electrical Engineer</label></li>
+            <li><label><input type="checkbox" name="category" value="Finance / Accounting">Finance / Accounting</label></li>
+            <li><label><input type="checkbox" name="category" value="Graphic Designer">Graphic Designer</label></li>
+            <li><label><input type="checkbox" name="category" value="HR / Recruiter">HR / Recruiter</label></li>
+            <li><label><input type="checkbox" name="category" value="Marketing / Sales Executive">Marketing / Sales Executive</label></li>
+            <li><label><input type="checkbox" name="category" value="Mechanical Engineer">Mechanical Engineer</label></li>
+            <li><label><input type="checkbox" name="category" value="Network Engineer / Cybersecurity">Network Engineer / Cybersecurity</label></li>
+            <li><label><input type="checkbox" name="category" value="Photographer / Videographer">Photographer / Videographer</label></li>
+            <li><label><input type="checkbox" name="category" value="Social Media Manager">Social Media Manager</label></li>
+            <li><label><input type="checkbox" name="category" value="Software Developer">Software Developer</label></li>
+            <li><label><input type="checkbox" name="category" value="System Administrator">System Administrator</label></li>
+            <li><label><input type="checkbox" name="category" value="UI/UX Designer">UI/UX Designer</label></li>
+            <li><label><input type="checkbox" name="category" value="Video Editor">Video Editor</label></li>
+            <li><label><input type="checkbox" name="category" value="Web Developer / Frontend / Backend">Web Developer / Frontend / Backend</label></li>
           </div>
         </div>
         <button type="submit" class="upload-btn">Upload</button>
@@ -129,6 +148,6 @@
   </div>
   
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="home.js"></script>
+<script type="module" src="home.js"></script>
 </body>
 </html>
