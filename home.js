@@ -183,6 +183,7 @@ resumeUploadForm.addEventListener("submit", async (e) => {
     alert("Resume uploaded successfully!");
     resumeCard.classList.remove("visible");
     document.body.style.overflow = "auto";
+    window.location.reload();
 
     
 // Add resume metadata
@@ -203,3 +204,38 @@ resumeUploadForm.addEventListener("submit", async (e) => {
     }
   }
 });
+
+// resume preview
+
+async function loadRecentResumes() {
+  const { data, error } = await supabase
+    .from("resume_metadata")
+    .select("*")
+    .order("uploaded_at", { ascending: false })
+    .limit(5);
+
+  if (error) {
+    console.error("Error loading recent resumes:", error);
+    return;
+  }
+
+  const resumeList = document.getElementById("resumeList");
+  resumeList.innerHTML = "";
+
+  data.forEach(resume => {
+    const card = document.createElement("div");
+    card.className = "resume-card";
+
+    card.innerHTML = `
+      <p><strong>User:</strong> ${resume.user_email}</p>
+      <p><strong>Categories:</strong> ${resume.categories.split(", ")}</p>
+      <p><strong>Uploaded:</strong> ${new Date(resume.uploaded_at).toLocaleString()}</p>
+      <a href="${resume.file_url}" target="_blank">View Resume</a>
+    `;
+
+    resumeList.appendChild(card);
+  });
+}
+
+// Call on page load
+loadRecentResumes();
