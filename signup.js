@@ -38,7 +38,7 @@ if (signupForm) {
       signupForm.reset();
 
       // Redirect to the home screen
-      window.location.href = "home.html";
+      window.location.href = "index.html";
     } catch (error) {
       console.error("Signup error:", error); // Debugging: Log the error
       alert("Signup failed: " + error.message);

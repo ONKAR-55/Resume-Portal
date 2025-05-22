@@ -62,7 +62,7 @@ newPasswordForm.addEventListener('submit', async (e) => {
     alert("Error updating password: " + error.message);
   } else {
     alert("Password updated successfully!");
-    window.location.href = 'home.html'; // Redirect to home or login page
+    window.location.href = 'index.html'; // Redirect to home or login page
   }
 });
 
