@@ -183,8 +183,6 @@ resumeUploadForm.addEventListener("submit", async (e) => {
     alert("Resume uploaded successfully!");
     resumeCard.classList.remove("visible");
     document.body.style.overflow = "auto";
-    window.location.reload();
-
     
 // Add resume metadata
     try {
