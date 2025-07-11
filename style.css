@@ -21,6 +21,8 @@ body {
     font-size: 2rem;
 }
 
+
+
 /* Menu Button (Sidebar Toggle) */
 .menu-btn {
     font-size: 2rem;
@@ -503,7 +505,7 @@ body {
     border: 2px solid black;
 }
 
-.checkbox {
+.checkbox_login {
     position: absolute;
     left: auto;
     right: 6rem;
@@ -516,9 +518,9 @@ body {
 
 .checkbox_signup {
     position: absolute;
-    left: 3rem;
-    bottom: auto;
-    top: 372px;
+    left: auto;
+    right: 5%;
+    top: 320px;
     cursor: pointer;
     height: 20px;
     width: 20px;
@@ -612,4 +614,75 @@ body {
 .categories label:hover {
     background-color: #ccc;
     box-shadow: black 0 0 5px 1px;
+}
+
+.sigup_body {
+    background-image: linear-gradient(to right, #34a853, #4285f4);
+    color: white;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    height: 100vh; /* Full viewport height */
+}
+.signup_header {
+    margin-left: 40%;
+}
+
+@media (max-width: 600px) {
+.header h1 {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+}
+
+.modal-content {
+    width: 60%;
+    height: 50%;
+    padding-bottom: 20%;
+}
+
+/* Complete Button */
+.continue-login {
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 0%;
+}
+
+/* Google Button */
+.google-btn {
+    width: 100%;
+    background-color: white;
+    font-size: 1rem;
+    margin-top: 0rem;
+}
+
+.google-btn svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.close-btn {
+    margin-top: 1rem;
+    background: #ccc;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.checkbox_login {
+    margin-top: 30px;
+    right: 10%;
+}
+.signup_header {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.checkbox_signup {
+    left: auto;
+    right: 10%;
+    top: 360px;
+}
 }
